@@ -7,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   try {
-    throw Error("弓少旭测试sourcemap");
+    throw Error('弓少旭测试')
   } catch (error) {
     console.log(error);
   }
