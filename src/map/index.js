@@ -15,8 +15,8 @@ async function findErrorLocation() {
     // 创建 SourceMapConsumer 对象
     await new sourceMap.SourceMapConsumer(rawSourceMap).then((consumer) => {
       // 替换为实际的报错行数和列数
-      const errorLine = 27;
-      const errorColumn = 11;
+      const errorLine = 40;
+      const errorColumn = 57484;
 
       // 通过源映射查找源代码位置
       const originalPosition = consumer.originalPositionFor({
@@ -41,6 +41,7 @@ async function findErrorLocation() {
         `报错代码行数：${originalPosition.line},\n` +
         `报错代码列数：${originalPosition.column}`;
       console.log(prompts);
+      consumer.destroy();
     });
   } catch (error) {
     console.error("Error analyzing source map:", error + "\n");
