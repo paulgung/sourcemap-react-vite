@@ -1,0 +1,88 @@
+/* App.module.css */
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  /* App.module.css */
+  .errorStack {
+    width: 40%;
+    margin-bottom: 20px;
+    /* 在组件下方添加一些间隔 */
+    padding: 15px;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 文本区域样式 */
+  .errorStack .ant-input-textarea {
+    margin-bottom: 10px;
+    /* 与按钮之间的间隔 */
+    border-color: #d9d9d9;
+    /* 边框颜色 */
+    border-radius: 4px;
+    /* 圆角 */
+  }
+
+  /* 按钮样式 */
+  .analysisBtn {
+    margin-top: 10px;
+    width: 100%;
+    /* 按钮宽度与容器相同 */
+    border-radius: 4px;
+    /* 圆角 */
+    background-color: #1890ff;
+    /* Ant Design 主色调 */
+    border-color: #1890ff;
+    color: #fff;
+    /* 文字颜色 */
+    font-weight: 500;
+    /* 字体加粗 */
+  }
+
+  /* App.module.css */
+  .errorStackAnalysis {
+    width: 55%;
+    /* 在组件上方添加一些间隔 */
+    padding: 15px;
+    /* 内部填充 */
+    border-radius: 4px;
+    /* 边框圆角 */
+    background-color: #f7f7f7;
+    /* 轻微灰色的背景 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* 添加阴影以提升层次感 */
+    color: #333;
+    /* 字体颜色 */
+    font-size: 14px;
+    /* 字体大小 */
+  }
+
+  .errorStackAnalysis > div:first-child {
+    font-weight: 500;
+    /* 加粗标题 */
+    margin-bottom: 10px;
+    /* 在标题和内容之间添加一些间隔 */
+    color: #000;
+    /* 标题颜色更深 */
+  }
+
+  .errorStackAnalysis > div:last-child {
+    white-space: pre-wrap;
+    /* 保留空白符和换行 */
+    background-color: #fff;
+    /* 内容背景为白色 */
+    border: 1px solid #d9d9d9;
+    /* 边框颜色 */
+    border-radius: 4px;
+    /* 内容区域圆角 */
+    padding: 10px;
+    /* 内容区域填充 */
+    max-height: 300px;
+    /* 最大高度，超出部分滚动 */
+    overflow-y: auto;
+    /* 超出高度时允许滚动 */
+    min-height: 308px;
+  }
+}

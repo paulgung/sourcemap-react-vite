@@ -10,9 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "antd": "^5.12.8",
+    "axios": "^1.6.5",
+    "error-stack-parser": "^2.1.4",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "source-map": "^0.7.4"
+    "source-map": "^0.7.4",
+    "stacktrace-parser": "^0.1.10"
   },
   "devDependencies": {
     "@types/node": "^20.10.6",
