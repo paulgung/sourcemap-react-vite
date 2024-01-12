@@ -1,0 +1,9 @@
+### 测试上传文件
+POST https://occ-test.10jqka.com.cn/loki/api/sourcemap/v1/file/save  HTTP/1.1
+Content-Type: application/json
+
+{
+  "file": {{base64 | ./umi.315e23b8.js.map }},
+  "filename": "umi.315e23b8.js"
+}
+

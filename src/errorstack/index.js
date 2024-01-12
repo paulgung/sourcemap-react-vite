@@ -1,17 +1,18 @@
-import { parse } from 'stacktrace-parser';
+const log = `Uncaught (in promise) Error: Unknown Component: interaction.tooltipThumb
+    at In (helper.js:33:11)
+    at l (library.js:20:32)
+    at eval (library.js:24:16)
+    at CO (plot.js:402:25)
+    at eval (plot.js:195:41)
+    at Generator.next (<anonymous>)
+    at m (plot.js:4:58)`;
 
-try {
-  // 抛出一个自定义错误
-  throw new Error('This is a custom error message');
-} catch (error) {
-  // 使用 stacktrace-parser 解析错误堆栈
-  const stackFrames = parse(error.stack);
-
-  // 遍历解析后的堆栈帧
-  stackFrames.forEach((frame) => {
-    console.log(`Function: ${frame.methodName}`);
-    console.log(`File: ${frame.fileName}`);
-    console.log(`Line: ${frame.lineNumber}`);
-    console.log(`Column: ${frame.column}`);
-  });
+const regex = /(\w+\.\w+):(\d+):(\d+)/g;
+let match;
+while ((match = regex.exec(log)) !== null) {
+  const fileName = match[1];
+  const lineNumber = match[2];
+  const columnNumber = match[3];
+  
+  console.log(`文件名: ${fileName}, 行号: ${lineNumber}, 列号: ${columnNumber}`);
 }
