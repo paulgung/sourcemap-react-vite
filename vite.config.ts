@@ -5,6 +5,6 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   build: {
-    sourcemap: false, // 开启 Source Map
+    sourcemap: true, // 开启 Source Map
   },
 });

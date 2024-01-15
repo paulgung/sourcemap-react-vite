@@ -6,7 +6,7 @@ async function findErrorLocation() {
   try {
     // 构建 .map 文件的绝对路径
     const mapFilePath = path.join(
-      "/Users/paulgung/Documents/弓少旭的编程工作/弓少旭的设计方案/index-KSB-9Be7.js.map"
+      "/Users/paulgung/workspace/sourcemap-react-vite/dist/assets/index-hew3n7rW.js.map"
     );
 
     // 读取 .map 文件内容
@@ -28,6 +28,7 @@ async function findErrorLocation() {
       // 使用源映射还原源代码
       const originalSource = consumer.sourceContentFor(originalPosition.source);
 
+      console.log("originalSource", originalSource);
       const sourceLines = originalSource.split("\n");
 
       let codes = ``;
