@@ -1,0 +1,43 @@
+.exceptionLogContainer {
+  width: 100%;
+  overflow-y: scroll;
+  margin-top: 10px;
+  padding: 4px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 0 2px rgba(0, 0, 0, 0.3),
+    0 0 3px rgba(0, 0, 0, 0.3), 0 0 4px rgba(0, 0, 0, 0.3);
+
+  .logItem {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 3px;
+
+    .logItemDetail {
+      margin-right: 4px;
+      background-color: #eee;
+      border-radius: 4px;
+      padding: 2px 4px;
+    }
+
+    .inline {
+      margin-right: 4px;
+      flex-wrap: wrap;
+      overflow: auto;
+      max-height: 250px;
+    }
+
+    .inlineBlack {
+      margin-right: 4px;
+      flex-wrap: nowrap;
+      overflow: auto;
+      max-height: 250px;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+  }
+}

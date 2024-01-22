@@ -28,6 +28,7 @@ const CodeAnalysis = () => {
         {/* 左侧 - 源代码 */}
         <div className={styles.sourceCode}>
           <Card title="源代码">
+            <div id="abc">
             <SyntaxHighlighter language="jsx" style={darcula}>
               {`         <Button
             type="primary"
@@ -37,6 +38,7 @@ const CodeAnalysis = () => {
             分析代码
           </Button>`}
             </SyntaxHighlighter>
+            </div>
           </Card>
         </div>
         {/* 右侧 - AI 分析结果 */}
