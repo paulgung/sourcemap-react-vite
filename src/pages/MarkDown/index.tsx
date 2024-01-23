@@ -2,7 +2,7 @@ import { Layout, Card } from "antd";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism"; // 引入样式
 import styles from "./index.module.css";
-import MarkdownWithHighlight2 from "../MarkDown2";
+import MarkdownWithHighlight2 from "../../components/MarkDownCode";
 const { Content } = Layout;
 
 const MarkDown = () => {
