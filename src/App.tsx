@@ -4,6 +4,7 @@ import StackParse from "./pages/StackParse";
 import MarkDown from "./pages/MarkDown";
 import MyMoniter from "./pages/MyMoniter";
 import MyMoniterCSS from "./pages/MyMoniterCSS";
+import SseTest from "./pages/SseTest";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/mk" element={<MarkDown />} />
       <Route path="/mt" element={<MyMoniter onFilterChange={()=>{}} />} />
       <Route path="/mtcss" element={<MyMoniterCSS />} />
+      <Route path="/sse" element={<SseTest />} />
     </Routes>
   );
 }

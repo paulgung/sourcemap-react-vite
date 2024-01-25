@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Input, Button } from "antd";
 import styles from "./index.module.css";
 import axios from "axios";
+import FormData from "form-data";
+const form = new FormData();
 
+form.append("gsx", "gsx");
+
+console.log("form", form);
 const { TextArea } = Input;
 
 function Home() {
