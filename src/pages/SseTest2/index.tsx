@@ -29,10 +29,10 @@ const chatWithPrompt = (prompt: string) => {
   form.append("prompt", prompt);
 
   console.log("弓少旭想看看form", form);
-
+  const param = { prompt: "vue3有哪些特性" };
   fetchEventSource(sseUrl, {
     method: "POST",
-    body: form,
+    body: JSON.stringify(param),
     signal: signal,
     openWhenHidden: true, // 控制切换时不关闭sse链接
     onopen(res) {
