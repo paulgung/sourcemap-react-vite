@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Layout, Input, Button, Card } from "antd";
+import { Layout, Card } from "antd";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism"; // 引入样式
 import styles from "./index.module.css";
@@ -7,21 +6,6 @@ import styles from "./index.module.css";
 const { Content } = Layout;
 
 const CodeAnalysis = () => {
-  const [sourceCode, setSourceCode] = useState("");
-  const [analysisResult, setAnalysisResult] = useState("");
-
-  const analyzeCode = () => {
-    // 假设这里是实际的 AI 代码分析逻辑
-    const fakeAnalysisResult = `          <Button
-            type="primary"
-            onClick={analyzeCode}
-            className={styles.analyzeButton}
-          >
-            分析代码
-          </Button>`;
-    setAnalysisResult(fakeAnalysisResult);
-  };
-
   return (
     <Layout>
       <Content className={styles.codeAnalysisContent}>
@@ -29,15 +13,15 @@ const CodeAnalysis = () => {
         <div className={styles.sourceCode}>
           <Card title="源代码">
             <div id="abc">
-            <SyntaxHighlighter language="jsx" style={darcula}>
-              {`         <Button
+              <SyntaxHighlighter language="jsx" style={darcula}>
+                {`         <Button
             type="primary"
             onClick={analyzeCode}
             className={styles.analyzeButton}
           >
             分析代码
           </Button>`}
-            </SyntaxHighlighter>
+              </SyntaxHighlighter>
             </div>
           </Card>
         </div>
