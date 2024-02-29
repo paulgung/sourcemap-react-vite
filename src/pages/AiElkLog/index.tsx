@@ -1,39 +1,19 @@
 import React, { useState, useEffect } from "react";
-
+import { ChatWithPrompt } from "@/components/chatgpt";
 const SseTest = () => {
-  const [messages, setMessages] = useState<{ message: string }[]>([]);
+  const [aiAnalysis, setAiAnalysis] = useState("");
 
+  const getChatId222 = async () => {
+    ChatWithPrompt("如何创业成功？企业家的潜质是什么",setAiAnalysis);
+  };
   useEffect(() => {
-    // 创建一个新的 EventSource 实例连接到 SSE 端点
-    const eventSource = new EventSource("http://localhost:3000/chat-gpt/sse"); // 替换为您的 SSE 端点 URL
-
-    // 监听消息事件
-    eventSource.onmessage = (event) => {
-      const newMessage = JSON.parse(event.data);
-      console.log("新消息:", newMessage); // 打印最新的消息
-      setMessages((prev) => [...prev, newMessage]);
-    };
-
-    // 监听错误事件
-    eventSource.onerror = (error) => {
-      console.error("EventSource failed:", error);
-      eventSource.close();
-    };
-
-    // 清理函数
-    return () => {
-      eventSource.close();
-    };
+    getChatId222();
   }, []);
 
   return (
     <div>
-      <h2>SSE Messages</h2>
-      <ul>
-        {messages.map((msg, index) => (
-          <li key={index}>{msg.message}</li>
-        ))}
-      </ul>
+      <h2>AI排障</h2>
+      <div>{aiAnalysis}</div>
     </div>
   );
 };
