@@ -2,7 +2,7 @@ import { Layout, Card } from "antd";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism"; // 引入样式
 import styles from "./index.module.css";
-import MarkdownWithHighlight2 from "../../components/MarkDownCode";
+import MarkdownWithHighlight from "@/components/MarkDownCode";
 const { Content } = Layout;
 
 const MarkDown = () => {
@@ -31,7 +31,7 @@ const MarkDown = () => {
         <div className={styles.errorStackAnalysis}>
           <div>错误栈排障结果：</div>
           <div>
-            <MarkdownWithHighlight2 content={test2.res} />
+            <MarkdownWithHighlight content={test2.res} />
           </div>
         </div>
       </Content>
