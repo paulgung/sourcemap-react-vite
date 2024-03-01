@@ -8,7 +8,7 @@ instance.interceptors.response.use(
   (response) => {
     // 在这里对响应数据进行处理
     // 提取出响应数据并直接返回
-    return response.data.data;
+    return response.data;
   },
   (error) => {
     // 对请求错误做些什么

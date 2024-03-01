@@ -1,7 +1,5 @@
 import axios from "@/axios";
-interface IChatWithPrompt {
-  res: string;
-}
+
 interface IGetAlertInfo {
   service: string;
   from: string | number;
@@ -9,9 +7,7 @@ interface IGetAlertInfo {
 }
 
 // promt gpt
-export const chatWithPrompt = async (
-  prompts: string
-): Promise<IChatWithPrompt> => {
+export const chatWithPrompt = async (prompts: string) => {
   return axios.post(
     "https://frontend.myhexin.com/kingfisher/robot/homeworkChat",
     {
@@ -23,11 +19,9 @@ export const chatWithPrompt = async (
   );
 };
 
-export const getAlertInfo = async (
-  params: IGetAlertInfo
-): Promise<IChatWithPrompt> => {
+export const getAlertInfo = async (params: IGetAlertInfo) => {
   return axios.post(
-    "https://apm.myhexin.com/elk/mobile-archive-am-skywalking-log-json-*/_search",
+    "/api/elk/mobile-archive-am-skywalking-log-json-*/_search",
     {
       query: {
         bool: {
