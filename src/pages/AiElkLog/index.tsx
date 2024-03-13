@@ -3,47 +3,59 @@ import { chatWithPrompt, getAlertInfo } from "@/service";
 import MarkdownWithHighlight from "@/components/MarkDownCode";
 import MyMoniterCSS from "@/pages/MyMoniterCSS";
 import styles from "./index.module.css";
-import { map, omit, pickBy, pick } from "lodash";
+import { map, pickBy, pick } from "lodash";
+import { Spin } from "antd";
+import dayjs from "dayjs";
+
+// http://localhost:5174/aielk?service=news-p-fe-anomaly-analysis&from=1&to=1707874936154
+
+interface IAlertInfo {
+  service: string;
+  group: string;
+  errorUrl: string;
+  stack: string;
+  message: string;
+  log_time: string;
+}
 
 const SseTest = () => {
   const [aiAnalysis, setAiAnalysis] = useState("");
-  const [alertInfo, setAlertInfo] = useState([]);
-  
-  // chat with prompt
-  const chatGpt = async () => {
+  const [alertInfoList, setAlertInfoList] = useState<IAlertInfo[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  // AI分析elk
+  const aiAnalysisElk = async (elkString: string) => {
     const prompt =
       `请你扮演一名程序员,现在有一个紧急线上bug,我给你提供最近一天的告警日志,请你帮我分析bug原因,以下是日志中的报错信息:\n` +
-      `${errorStack}\n`;
+      `${elkString}\n`;
     const {
       data: { res },
     } = await chatWithPrompt(prompt);
     setAiAnalysis(res);
+    setLoading(false);
   };
 
-  // 过滤告警信息
-  const handleAlertData = (hits) => {
-    const originalAlertData = hits.map((item) => {
+  // 过滤告警信息, 剔除空数据
+  const handleAlertData = (hits: { _source: any }[]) => {
+    const _sourceList = hits.map((item) => {
       return item._source;
-      //
     });
-    return originalAlertData.map((obj) =>
+    const alertDataList = _sourceList.map((obj) =>
       pickBy(obj, (value) => value !== "" && value !== 0)
     );
-  };
 
-  // 获取告警信息中的错误栈以及message
-  const handleAlertDataV2 = (hits) => {
-    return map(hits, (obj) =>
-      omit(obj, [
-        "grade",
-        "category",
-        "uniqueId",
-        "subGroup",
-        "indexTime",
-        "elkIndexTime",
-        "sdkVersion",
-      ])
-    );
+    return map(alertDataList, (obj) => {
+      obj.log_time = dayjs(obj?.log_time).format("YYYY-MM-DD HH:mm:ss");
+
+      return pick(obj, [
+        "service",
+        "group",
+        "errorUrl",
+        "stack",
+        "message",
+        "log_time",
+      ]);
+    });
   };
 
   // 获取告警信息
@@ -55,7 +67,6 @@ const SseTest = () => {
     const to = queryParams.get("to");
 
     // 获取告警实例信息
-    console.log("弓少旭想看看 alert,from,to", service, from, to);
     const {
       hits: { hits },
     } = await getAlertInfo({
@@ -63,26 +74,35 @@ const SseTest = () => {
       from: from ?? 0,
       to: to ?? 0,
     });
-    console.log("弓少旭想看看hits", hits);
-    const alertInfo = handleAlertData(hits);
-    const alertInfoV2: any = handleAlertDataV2(alertInfo);
-    setAlertInfo(alertInfoV2);
+
+    const alertInfoList = handleAlertData(hits);
+    setAlertInfoList(alertInfoList);
   };
   useEffect(() => {
     getAlert();
   }, []);
 
+  useEffect(() => {
+    // ELK信息
+    const concatenatedMessages = alertInfoList
+      .map((obj, index) => `${index + 1}: ${obj.message}`)
+      .join(", ");
+
+    aiAnalysisElk(concatenatedMessages);
+  }, [alertInfoList]);
   return (
     <div>
       <h2>ELK排障</h2>
-      <div className={styles.container}>
-        <div className={styles.contentLeft}>
-          <MyMoniterCSS alertInfo={alertInfo} />
+      <Spin spinning={loading}>
+        <div className={styles.container}>
+          <div className={styles.contentLeft}>
+            <MyMoniterCSS alertInfoList={alertInfoList} />
+          </div>
+          <div className={styles.contentRight}>
+            <MarkdownWithHighlight content={aiAnalysis} />
+          </div>
         </div>
-        <div className={styles.contentRight}>
-          <MarkdownWithHighlight content={aiAnalysis} />
-        </div>
-      </div>
+      </Spin>
     </div>
   );
 };

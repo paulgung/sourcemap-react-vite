@@ -6,6 +6,10 @@ interface IGetAlertInfo {
   to: string | number;
 }
 
+interface IAlertInfo {
+  hits: any;
+}
+
 // promt gpt
 export const chatWithPrompt = async (prompts: string) => {
   return axios.post(
@@ -19,7 +23,9 @@ export const chatWithPrompt = async (prompts: string) => {
   );
 };
 
-export const getAlertInfo = async (params: IGetAlertInfo) => {
+export const getAlertInfo = async (
+  params: IGetAlertInfo
+): Promise<IAlertInfo> => {
   return axios.post(
     "/api/elk/mobile-archive-am-skywalking-log-json-*/_search",
     {
