@@ -25,9 +25,11 @@ const SseTest = () => {
 
   // AI分析elk
   const aiAnalysisElk = async (elkString: string) => {
+    setLoading(true);
     const prompt =
       `请你扮演一名程序员,现在有一个紧急线上bug,我给你提供最近一天的告警日志,请你帮我分析bug原因,以下是日志中的报错信息:\n` +
       `${elkString}\n`;
+    console.log("弓少旭想看看prompt", prompt);
     const {
       data: { res },
     } = await chatWithPrompt(prompt);
@@ -83,6 +85,7 @@ const SseTest = () => {
   }, []);
 
   useEffect(() => {
+    if (!alertInfoList.length) return;
     // ELK信息
     const concatenatedMessages = alertInfoList
       .map((obj, index) => `${index + 1}: ${obj.message}`)
@@ -93,16 +96,16 @@ const SseTest = () => {
   return (
     <div>
       <h2>ELK排障</h2>
-      <Spin spinning={loading}>
-        <div className={styles.container}>
-          <div className={styles.contentLeft}>
-            <MyMoniterCSS alertInfoList={alertInfoList} />
-          </div>
-          <div className={styles.contentRight}>
-            <MarkdownWithHighlight content={aiAnalysis} />
-          </div>
+      <div className={styles.container}>
+        <div className={styles.contentLeft}>
+          <MyMoniterCSS alertInfoList={alertInfoList} />
         </div>
-      </Spin>
+        <div className={styles.contentRight}>
+          <Spin spinning={loading}>
+            <MarkdownWithHighlight content={aiAnalysis} />
+          </Spin>
+        </div>
+      </div>
     </div>
   );
 };
